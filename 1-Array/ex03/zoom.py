@@ -38,7 +38,17 @@ def main():
         img = ft_load("animal.jpeg")
         if img is None:
             return
+        print(f"Taille de l'image : {img.shape}")
+        print(f"Nombre de canaux : {img.shape[2] if img.ndim == 3 else 1}")
+        print("Contenu des pixels :")
+        print(img[:3])
+        print("...")
+        print(img[-3:])
         zoom = zoom_image(img)
+        print(f"New shape after slicing: {zoom.shape}")
+        print(zoom[:3])
+        print("...")
+        print(zoom[-3:])
         display_image(zoom, title="Zoomed Image")
     except Exception as e:
         print(f"Erreur inattendue : {e}")
