@@ -28,9 +28,8 @@ def ft_load(path: str) -> npt.NDArray | None:
             print(f"The shape of image is: {img.shape}")
             # Afficher un aperçu des pixels (3 premières et 3 dernières lignes)
             #np.set_printoptions(threshold=3, edgeitems=2)
-            ret = img.reshape(1, pil_img.size[0] * pil_img.size[1], 3)
-            print(ret.shape)
-            return ret
+            print(img.reshape(1, pil_img.size[0] * pil_img.size[1], 3))
+            return img
     
     except FileNotFoundError:
         print(f"Erreur : Le fichier {path} n'a pas été trouvé.")
