@@ -23,7 +23,7 @@ def ft_load(path: str) -> npt.NDArray | None:
             # S'assurer que l'image est bien en RGB
             if pil_img.mode != "RGB":
                 pil_img = pil_img.convert("RGB")
-            img = np.array(pil_img)
+            img = np.array(pil_img).copy()
             # print(img)
 
             print(f"The shape of image is: {img.shape}")

@@ -28,4 +28,4 @@ def slice_me(family: list, start: int, end: int) -> list:
     # Affiche la nouvelle forme après la découpe
     print(f"My new shape is : {(len(sliced_array), len(family[0]))}")
 
-    return sliced_array
+    return [row[:] for row in sliced_array]

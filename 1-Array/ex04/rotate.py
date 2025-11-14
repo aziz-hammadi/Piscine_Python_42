@@ -1,45 +1,116 @@
+# zoom.py
+
+
 import numpy as np
 from PIL import Image
-from load_image import load_and_crop_image
+from matplotlib import pyplot as plt
+from load_image import ft_load
 
 
-def manual_transpose(arr):
+def custom_print_array(arr: np.ndarray) -> str:
+    """3 premières et 3 dernières valeurs"""
+    np.set_printoptions(threshold=3)
+    string = f"[{arr[0].__str__()}\n  ... \n {arr[-1].__str__()}]"
+    return string
+
+
+def zoom_image(image: np.ndarray, start_x=100,
+               start_y=450, x=400, y=400) -> np.ndarray:
     """
-    Manually transposes a 2D numpy array.
+    Zoom on a specific area of the image and convert it to grayscale.
+
     Args:
-        arr (np.ndarray): 2D array to transpose.
+        image (np.ndarray): The image as a NumPy array.
+        zoom_area (tuple): The area to zoom (start_x, start_y, end_x, end_y).
+
     Returns:
-        np.ndarray: Transposed array.
+        np.ndarray: The zoomed and grayscale image.
+
+    Raises:
+        ValueError: If the zoom area is invalid.
     """
-    rows, cols = arr.shape
-    transposed = np.zeros((cols, rows), dtype=arr.dtype)
-    for i in range(rows):
-        for j in range(cols):
-            transposed[j][i] = arr[i][j]
-    return transposed
+    try:
+        # Vérifier que la zone de zoom est valide
+        if (
+            start_x < 0
+            or start_y < 0
+            or x <= 0
+            or y <= 0
+            or start_x + x > image.shape[0]
+            or start_y + y > image.shape[1]
+        ):
+            raise ValueError("Invalid zoom area.")
+        end_x = start_x + x
+        end_y = start_y + y
+        # Zoom sur la zone spécifiée
+        zoomed_image = image[start_x:end_x, start_y:end_y]
+
+        # Afficher la nouvelle forme de l'image
+        or_shape = zoomed_image.reshape(zoomed_image.shape[0],
+                                        zoomed_image.shape[1], 1)
+        print(
+            f"The shape of image is:{or_shape.shape} or{zoomed_image.shape}")
+        print(zoomed_image.reshape(1, zoomed_image.shape[0]
+                                   * zoomed_image.shape[1], 1))
+
+        # Application de la Transposition avec array.T
+        zoomed_image = zoomed_image.T
+        print(f"New shape after Transpose: {zoomed_image.shape}")
+
+        print(custom_print_array(zoomed_image))
+        return zoomed_image
+        # return zoomed_image
+    except Exception as e:
+        raise e
 
 
-def display_image(arr):
+def display_image(image: np.ndarray, title: str):
     """
-    Displays a numpy array as an image.
+    Display the image with a title.
+
     Args:
-        arr (np.ndarray): Array to display.
+        image (np.ndarray): The image to display.
+        title (str): The title of the image.
     """
-    img = Image.fromarray(arr)
-    img.show()
+    try:
+        plt.imshow(
+            image, cmap="gray", vmin=0, vmax=255
+        )  # Afficher en niveaux de gris
+        # plt.title(title)
+        # plt.xlabel("X axis")
+        # plt.ylabel("Y axis")
+        plt.show()
+    except KeyboardInterrupt:
+        plt.close("all")
+    except Exception as e:
+        raise e
 
 
 def main():
+    """
+    Main function to load the image, zoom on a specific area, and display it.
+    """
     try:
-        arr = load_and_crop_image("animal.jpeg", 400)
-        print("The shape of image is:", arr.shape)
-        print(arr)
-        arr_t = manual_transpose(arr)
-        print("New shape after Transpose:", arr_t.shape)
-        print(arr_t)
-        display_image(arr_t)
+        # Charger l'image
+        image = ft_load("animal.jpeg")
+
+        if image is None:
+            raise ValueError("Failed to load image.")
+
+        # Définir la zone à zoomer (par exemple, un carré au centre de l'image)
+        height, width, _ = image.shape
+
+        # Effectuer le zoom
+
+        gray_array = np.array(Image.fromarray(image).convert("L"))
+
+        zoomed_image = zoom_image(gray_array, 150, 450, 400, 400)
+        # Afficher l'image zoomée
+        display_image(zoomed_image, "Zoomed Image")
     except Exception as e:
-        print("Error:", e)
+        print(f"Error: {e}")
+    finally:
+        plt.close("all")
 
 
 if __name__ == "__main__":
