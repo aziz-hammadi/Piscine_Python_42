@@ -5,7 +5,7 @@ def run_tests():
     print("=== Tests valides ===")
     try:
         height = [2.71, 1.15]
-        weight = [165.3, 38.4]
+        weight = [-165.3, 38.4]
         bmi = give_bmi(height, weight)
         print("BMI calculés :", bmi, type(bmi))
         print("apply_limit :", apply_limit(bmi, 26))
@@ -14,7 +14,7 @@ def run_tests():
 
     try:
         height = [1.80, 1.65, 1.60]
-        weight = [70, 60, 50]
+        weight: list = [70, 60, 50]
         bmi = give_bmi(height, weight)
         print("BMI calculés :", bmi)
         print("apply_limit (limite=25) :", apply_limit(bmi, 25))

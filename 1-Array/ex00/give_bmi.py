@@ -4,8 +4,8 @@ Provides functions to calculate BMI values and check them against a limit.
 """
 
 
-
-def give_bmi(height: list[int | float], weight: list[int | float]) -> list[int | float]:
+def give_bmi(height: list[int | float],
+             weight: list[int | float]) -> list[int | float]:
     """
     Calculate BMI values from lists of heights and weights.
 
@@ -22,7 +22,7 @@ def give_bmi(height: list[int | float], weight: list[int | float]) -> list[int |
     """
     if len(height) != len(weight):
         raise ValueError("Height and weight lists must have the same length.")
-    
+
     if any(h < 0 for h in height) or any(w < 0 for w in weight):
         raise ValueError("Height and weight values must be non-negative.")
 
@@ -32,7 +32,7 @@ def give_bmi(height: list[int | float], weight: list[int | float]) -> list[int |
     if not all(isinstance(w, (int, float)) for w in weight):
         raise TypeError("Weight list must contain only int or float values.")
 
-    return [w / (h ** 2) for h, w in zip(height, weight)]
+    return [w / (h**2) for h, w in zip(height, weight)]
 
 
 def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
@@ -56,5 +56,3 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
         raise TypeError("Limit must be an integer.")
 
     return [b > limit for b in bmi]
-
-
