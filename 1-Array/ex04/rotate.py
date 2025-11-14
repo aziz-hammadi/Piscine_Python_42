@@ -2,6 +2,7 @@ import numpy as np
 from PIL import Image
 from load_image import load_and_crop_image
 
+
 def manual_transpose(arr):
     """
     Manually transposes a 2D numpy array.
@@ -17,6 +18,7 @@ def manual_transpose(arr):
             transposed[j][i] = arr[i][j]
     return transposed
 
+
 def display_image(arr):
     """
     Displays a numpy array as an image.
@@ -25,6 +27,7 @@ def display_image(arr):
     """
     img = Image.fromarray(arr)
     img.show()
+
 
 def main():
     try:
@@ -37,6 +40,7 @@ def main():
         display_image(arr_t)
     except Exception as e:
         print("Error:", e)
+
 
 if __name__ == "__main__":
     main()
