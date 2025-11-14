@@ -6,9 +6,7 @@ from pimp_image import ft_invert, ft_red, ft_green, ft_blue, ft_grey
 array = ft_load("landscape.jpg")
 if array is not None:
 	print(f"The shape of image is: {array.shape}")
-	print(array[:3])
-	print("...")
-	print(array[-3:])
+	print(array.reshape(1, array.shape[0] * array.shape[1], array.shape[2]))
 	print()
 
 	filters = [
