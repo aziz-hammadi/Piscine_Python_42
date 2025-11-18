@@ -1,5 +1,4 @@
 """
-Module give_bmi
 Fournit des fonctions pour calculer les valeurs d'IMC et les comparer à une limite.
 """
 
@@ -50,9 +49,9 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
         TypeError : Si bmi contient des types invalides ou si limit n'est pas un int.
     """
     if not all(isinstance(b, (int, float)) for b in bmi):
-        raise TypeError("BMI list must contain only int or float values.")
+        raise TypeError("La liste des IMC doit contenir uniquement des entiers ou des flottants.")
 
     if not isinstance(limit, int):
-        raise TypeError("Limit must be an integer.")
+        raise TypeError("La limite doit être un entier.")
 
     return [b > limit for b in bmi]
