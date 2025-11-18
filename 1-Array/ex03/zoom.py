@@ -1,6 +1,3 @@
-# zoom.py
-
-
 import numpy as np
 from PIL import Image
 from matplotlib import pyplot as plt
@@ -44,8 +41,7 @@ def zoom_image(image: np.ndarray,
         # Afficher la nouvelle forme de l'image
         or_shape = zoomed_image.reshape(zoomed_image.shape[0],
                                         zoomed_image.shape[1])
-        print(f"New shape after slicing:{
-            zoomed_image.shape} or {or_shape.shape}")
+        print(f"New shape after slicing:{zoomed_image.shape} or {or_shape.shape}")
         print(zoomed_image.reshape(1, zoomed_image.shape[0]
                                    * zoomed_image.shape[1], 1))
         return zoomed_image

@@ -1,4 +1,4 @@
-from piscine.python_1.ex01._array2D import slice_me
+from array2D import slice_me
 
 def main():
     """Fonction principale pour tester slice_me."""
@@ -10,8 +10,12 @@ def main():
     ]
 
     # Tests
-    print(slice_me(family, 0, 2))
-    print(slice_me(family, 1, -2))
+    print(slice_me(family, 0, 2), "\n")
+    print(slice_me(family, 1, -2), "\n")
+    print(slice_me(family, 1, 2), "\n")    
+    print(slice_me(family, 3, 1), "\n")
 
 if __name__ == "__main__":
     main()
+
+#a[start:end:step]
