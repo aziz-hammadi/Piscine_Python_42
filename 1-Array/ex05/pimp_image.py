@@ -10,7 +10,7 @@ def ft_red(array) -> np.ndarray:
     """Keep only the red channel, set green and blue to 0"""
     result = array.copy()
     result[..., 1] = 0
-    result[..., 2] = 0
+    result[:, :, 2] = 0
     return result
 
 
