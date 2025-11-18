@@ -15,6 +15,7 @@ def ft_load(path: str) -> npt.NDArray | None:
             img_format = pil_img.format
             print(f"Image format: {img_format}")
 
+
             # Si l'image est en niveaux de gris, la convertir en RGB
             """if len(img.shape) == 2:
                 img = np.stack((img,)*3, axis=-1)
@@ -24,12 +25,7 @@ def ft_load(path: str) -> npt.NDArray | None:
             if pil_img.mode != "RGB":
                 pil_img = pil_img.convert("RGB")
             img = np.array(pil_img).copy()
-            # print(img)
 
-            # print(f"The shape of image is: {img.shape}")
-            # Afficher un aperçu des pixels (3 premières et 3 dernières lignes)
-            # np.set_printoptions(threshold=3, edgeitems=2)
-            # print(img.reshape(1, pil_img.size[0] * pil_img.size[1], 3))
             return img
 
     except FileNotFoundError:
