@@ -1,53 +1,53 @@
 """
 Module give_bmi
-Provides functions to calculate BMI values and check them against a limit.
+Fournit des fonctions pour calculer les valeurs d'IMC et les comparer à une limite.
 """
 
 
 def give_bmi(height: list[int | float],
              weight: list[int | float]) -> list[int | float]:
     """
-    Calculate BMI values from lists of heights and weights.
+    Calcule les valeurs d'IMC à partir de listes de tailles et de poids.
 
-    Args:
-        height (List[int | float]): List of heights in meters.
-        weight (List[int | float]): List of weights in kilograms.
+    Arguments :
+        height (List[int | float]) : Liste des tailles en mètres.
+        weight (List[int | float]) : Liste des poids en kilogrammes.
 
-    Returns:
-        List[int | float]: List of BMI values.
+    Retourne :
+        List[int | float] : Liste des valeurs d'IMC.
 
-    Raises:
-        ValueError: If the lists are not the same size.
-        TypeError: If the lists contain elements that are not int or float.
+    Exceptions :
+        ValueError : Si les listes n'ont pas la même taille.
+        TypeError : Si les listes contiennent des éléments qui ne sont pas des int ou float.
     """
     if len(height) != len(weight):
-        raise ValueError("Height and weight lists must have the same length.")
+        raise ValueError("Les listes de tailles et de poids doivent avoir la même longueur.")
 
     if any(h < 0 for h in height) or any(w < 0 for w in weight):
-        raise ValueError("Height and weight values must be non-negative.")
+        raise ValueError("Les valeurs de taille et de poids doivent être positives.")
 
     if not all(isinstance(h, (int, float)) for h in height):
-        raise TypeError("Height list must contain only int or float values.")
+        raise TypeError("La liste des tailles doit contenir uniquement des entiers ou des flottants.")
 
     if not all(isinstance(w, (int, float)) for w in weight):
-        raise TypeError("Weight list must contain only int or float values.")
+        raise TypeError("La liste des poids doit contenir uniquement des entiers ou des flottants.")
 
     return [w / (h**2) for h, w in zip(height, weight)]
 
 
 def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
     """
-    Check whether BMI values exceed a given limit.
+    Vérifie si les valeurs d'IMC dépassent une limite donnée.
 
-    Args:
-        bmi (List[int | float]): List of BMI values.
-        limit (int): The threshold BMI value.
+    Arguments :
+        bmi (List[int | float]) : Liste des valeurs d'IMC.
+        limit (int) : La valeur seuil d'IMC.
 
-    Returns:
-        List[bool]: True if the BMI is greater than the limit, False otherwise.
+    Retourne :
+        List[bool] : True si l'IMC est supérieur à la limite, False sinon.
 
-    Raises:
-        TypeError: If bmi contains invalid types or limit is not an int.
+    Exceptions :
+        TypeError : Si bmi contient des types invalides ou si limit n'est pas un int.
     """
     if not all(isinstance(b, (int, float)) for b in bmi):
         raise TypeError("BMI list must contain only int or float values.")
