@@ -65,18 +65,50 @@ def ft_blue(array) -> array:
         _collect_and_show(result, "Figure VIII.5: Blue")
         return result
 
-def ft_grey(array) -> array:
-    if array is not None:
-        # Calcul de la moyenne sur les 3 canaux (axe 2) avec np.mean (addition interne)
-        grey_array = np.mean(array, axis=2).astype(np.uint8)
-        
-        # Création d'une image en niveaux de gris en dupliquant le canal unique sur 3 canaux
-        grey_image = np.zeros_like(array)
-        grey_image[:, :, 0] = grey_array
-        grey_image[:, :, 1] = grey_array
-        grey_image[:, :, 2] = grey_array
-        
-        # Affichage automatique des résultats avec fonction utilitaire interne
-        _collect_and_show(grey_image, "Figure VIII.5: Gray")
-        
-        return grey_image
+def ft_grey(array, correction_index: int = 0) -> array:
+    rgb_as_gimp = [1 / 0.3, 1 /0.59, 1 / 0.11]
+    rgb_as_gimp2= [1 / .2127, 1/0.6780, 1/0.0593]
+    rgb_CIE_1931  = [1/0.299,1/0.587,1/ 0.114]
+    rgb_ITU_R_BT_2100 = [1 / .2127, 1/0.6780, 1/0.0593]
+    rgb_ITU_R_BT_709 = [1 / .2126, 1/0.7152, 1/0.0722]
+    rgb_custom= [1 / .5000, 1/0.80, 1/0.001]
+
+    match correction_index:
+        case 0:
+            correction = rgb_as_gimp
+        case 1:
+            correction = rgb_as_gimp2
+        case 2:
+            correction = rgb_CIE_1931
+        case 3:
+            correction = rgb_ITU_R_BT_2100
+        case 4:
+            correction = rgb_ITU_R_BT_709
+        case 5:
+            correction = rgb_custom
+        case _:
+            correction = [1,1,1]
+
+
+  
+    rgb = array.copy()
+
+    r = rgb[:,:,0:1] 
+    g = rgb[:,:,1:2] 
+    b = rgb[:,:,2:3]
+
+ 
+    r[:,:,:]= r / correction[0]
+    g[:,:,:]= g / correction[1]
+    b[:,:,:]= b / correction[2]
+
+    r[:,:,:]= np.where(r > g, r, g)
+    r[:,:,:]= np.where(r > b, r, b)
+
+    b[:,:,:]= np.where(b > r, b, r)
+    b[:,:,:]= np.where(b > g, b, g)
+
+    g[:,:,:]= np.where(g > r, g, r)
+    g[:,:,:]= np.where(g > b, g, b)
+    _collect_and_show(rgb, "Figure VIII.5:Grey")
+    return  rgb
