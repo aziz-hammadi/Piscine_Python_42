@@ -1,5 +1,6 @@
 """
-Fournit des fonctions pour calculer les valeurs d'IMC et les comparer à une limite.
+Fournit des fonctions pour calculer les valeurs d'IMC
+et les comparer à une limite.
 """
 
 
@@ -17,20 +18,26 @@ def give_bmi(height: list[int | float],
 
     Exceptions :
         ValueError : Si les listes n'ont pas la même taille.
-        TypeError : Si les listes contiennent des éléments qui ne sont pas des int ou float.
+        TypeError : Si listes contiennent éléments non int ou non float.
     """
-    #mettre dans try except
+    # mettre dans try except
     if not all(isinstance(h, (int, float)) for h in height):
-        raise TypeError("La liste des tailles doit contenir uniquement des entiers ou des flottants.")
+        raise TypeError(
+            "liste tailles doit contenir uniquement entiers ou flottants"
+        )
 
     if not all(isinstance(w, (int, float)) for w in weight):
-        raise TypeError("La liste des poids doit contenir uniquement des entiers ou des flottants.")
+        raise TypeError(
+            "La liste poids uniquement des entiers ou des flottants."
+        )
 
     if len(height) != len(weight):
-        raise ValueError("Les listes de tailles et de poids doivent avoir la même longueur.")
+        raise ValueError(
+            "Les listes de tailles et de poids doivent avoir la même longueur."
+        )
 
     if any(h < 0 for h in height) or any(w < 0 for w in weight):
-        raise ValueError("Les valeurs de taille et de poids doivent être positives.")
+        raise ValueError("Les taille et de poids doivent être positives.")
     return [w / (h**2) for h, w in zip(height, weight)]
 
 
@@ -46,10 +53,14 @@ def apply_limit(bmi: list[int | float], limit: int) -> list[bool]:
         List[bool] : True si l'IMC est supérieur à la limite, False sinon.
 
     Exceptions :
-        TypeError : Si bmi contient des types invalides ou si limit n'est pas un int.
+        TypeError : Si bmi contient des types invalides
+        ou si limit n'est pas un int.
     """
     if not all(isinstance(b, (int, float)) for b in bmi):
-        raise TypeError("La liste des IMC doit contenir uniquement des entiers ou des flottants.")
+        raise TypeError(
+            """La liste des IMC doit contenir uniquement des entiers
+            ou des flottants."""
+        )
 
     if not isinstance(limit, int):
         raise TypeError("La limite doit être un entier.")

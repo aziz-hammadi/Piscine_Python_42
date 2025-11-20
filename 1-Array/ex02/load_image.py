@@ -30,7 +30,6 @@ def ft_load(path: str) -> npt.NDArray | None:
             # Afficher un aperçu des pixels (3 premières et 3 dernières lignes)
             # np.set_printoptions(threshold=3, edgeitems=2)
             ret = img.reshape(1, pil_img.size[0] * pil_img.size[1], 3)
-            #print(ret.shape)
             return ret
 
     except FileNotFoundError:

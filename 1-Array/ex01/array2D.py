@@ -4,7 +4,7 @@ def slice_me(family: list, start: int, end: int) -> list:
     retourne une version tronquée
     si necessaire en fonction du start et du end
     et affiche les shapes avant et après la découpe"""
-    #try except pour les erreurs
+    """try except pour les erreurs"""
     if not isinstance(family, list) or len(family) == 0:
         raise ValueError("family doit être une liste non vide")
 
