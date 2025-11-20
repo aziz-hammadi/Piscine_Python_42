@@ -2,35 +2,24 @@ import numpy as np
 import numpy.typing as npt
 from PIL import Image
 
-
 def ft_load(path: str) -> npt.NDArray | None:
     """
-    Cette fonction charge une image à partir du chemin donné,
-    affiche son format (dimensions) et retourne les pixels en RGB.
-
+    Charge une image à partir du chemin donné,
+    affiche son format et dimensions, puis retourne un array RGB.
     """
     try:
-        # Charger l'image avec PIL pour obtenir le format
         with Image.open(path) as pil_img:
             img_format = pil_img.format
             print(f"Image format: {img_format}")
-
-
-            # Si l'image est en niveaux de gris, la convertir en RGB
-            """if len(img.shape) == 2:
-                img = np.stack((img,)*3, axis=-1)
-            elif img.shape[2] == 4:
-                img = img[:, :, :3]"""
-            # S'assurer que l'image est bien en RGB
             if pil_img.mode != "RGB":
                 pil_img = pil_img.convert("RGB")
             img = np.array(pil_img).copy()
-
+            print(f"The shape of image is: {img.shape}")
+            print(img.reshape(1, img.shape[0] * img.shape[1], img.shape[2]))
+            #_collect_and_show(img, "Original")
             return img
-
     except FileNotFoundError:
         print(f"Erreur : Le fichier {path} n'a pas été trouvé.")
-        return
     except Exception as e:
         print(f"Erreur : {e}")
-        return
+    return None
