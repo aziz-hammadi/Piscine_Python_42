@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from numpy.typing import NDArray as array
 def on_key(event):
     plt.close(event.canvas.figure)
 
@@ -35,13 +35,13 @@ def _collect_and_show(img, name, original=None):
         _collect_and_show.titles.clear()
         _collect_and_show.original_added = False
 
-def ft_invert(array):
+def ft_invert(array) -> array:
     if array is not None:
         res = 255 - array
         _collect_and_show(res, "Figure VIII.2: Invert", original=array)
         return res
 
-def ft_red(array):
+def ft_red(array) -> array:
     if array is not None:
         result = array.copy()
         result[..., 1] = 0
@@ -49,7 +49,7 @@ def ft_red(array):
         _collect_and_show(result, "Figure VIII.3: Red")
         return result
 
-def ft_green(array):
+def ft_green(array) -> array:
     if array is not None:
         result = array.copy()
         result[..., 0] = 0
@@ -57,7 +57,7 @@ def ft_green(array):
         _collect_and_show(result, "Figure VIII.4: Green")
         return result
 
-def ft_blue(array):
+def ft_blue(array) -> array:
     if array is not None:
         result = array.copy()
         result[..., 0] = 0
@@ -65,22 +65,18 @@ def ft_blue(array):
         _collect_and_show(result, "Figure VIII.5: Blue")
         return result
 
-def ft_grey(array):
+def ft_grey(array) -> array:
     if array is not None:
-        #result = array.copy()
-        grey_array = array[:, :, 0] / 1.33
-        grey_array = array[:, :, 1] / 1.33
-        grey_array = array[:, :, 2] / 1.33
-    
-
-        # Créer un tableau vide pour stocker l'image en gris avec 3 canaux
+        # Calcul de la moyenne sur les 3 canaux (axe 2) avec np.mean (addition interne)
+        grey_array = np.mean(array, axis=2).astype(np.uint8)
+        
+        # Création d'une image en niveaux de gris en dupliquant le canal unique sur 3 canaux
         grey_image = np.zeros_like(array)
-
-        # Répéter la valeur du gris sur les 3 canaux manuellement
-        grey_image[:, :, 0] = grey_array  # Canal rouge
-        grey_image[:, :, 1] = grey_array  # Canal vert
-        grey_image[:, :, 2] = grey_array  # Canal bleu
-
-        # Afficher l'image transformée
+        grey_image[:, :, 0] = grey_array
+        grey_image[:, :, 1] = grey_array
+        grey_image[:, :, 2] = grey_array
+        
+        # Affichage automatique des résultats avec fonction utilitaire interne
         _collect_and_show(grey_image, "Figure VIII.5: Gray")
+        
         return grey_image
