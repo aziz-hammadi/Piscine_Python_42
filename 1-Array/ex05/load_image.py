@@ -2,6 +2,7 @@ import numpy as np
 import numpy.typing as npt
 from PIL import Image
 
+
 def ft_load(path: str) -> npt.NDArray | None:
     """
     Charge une image à partir du chemin donné,
@@ -16,7 +17,7 @@ def ft_load(path: str) -> npt.NDArray | None:
             img = np.array(pil_img).copy()
             print(f"The shape of image is: {img.shape}")
             print(img.reshape(1, img.shape[0] * img.shape[1], img.shape[2]))
-            #_collect_and_show(img, "Original")
+            # _collect_and_show(img, "Original")
             return img
     except FileNotFoundError:
         print(f"Erreur : Le fichier {path} n'a pas été trouvé.")
