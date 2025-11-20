@@ -66,31 +66,9 @@ def ft_blue(array) -> array:
         return result
 
 def ft_grey(array, correction_index: int = 0) -> array:
-    rgb_as_gimp = [1 / 0.3, 1 /0.59, 1 / 0.11]
-    rgb_as_gimp2= [1 / .2127, 1/0.6780, 1/0.0593]
-    rgb_CIE_1931  = [1/0.299,1/0.587,1/ 0.114]
-    rgb_ITU_R_BT_2100 = [1 / .2127, 1/0.6780, 1/0.0593]
-    rgb_ITU_R_BT_709 = [1 / .2126, 1/0.7152, 1/0.0722]
-    rgb_custom= [1 / .5000, 1/0.80, 1/0.001]
 
-    match correction_index:
-        case 0:
-            correction = rgb_as_gimp
-        case 1:
-            correction = rgb_as_gimp2
-        case 2:
-            correction = rgb_CIE_1931
-        case 3:
-            correction = rgb_ITU_R_BT_2100
-        case 4:
-            correction = rgb_ITU_R_BT_709
-        case 5:
-            correction = rgb_custom
-        case _:
-            correction = [1,1,1]
+    correction= [1 / .5000, 1/0.80, 1/0.001]
 
-
-  
     rgb = array.copy()
 
     r = rgb[:,:,0:1] 
