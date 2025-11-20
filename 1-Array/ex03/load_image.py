@@ -14,7 +14,7 @@ def ft_load(path: str) -> npt.NDArray | None:
         with Image.open(path) as pil_img:
             img_format = pil_img.format
             print(f"Image format: {img_format}")
-
+    
             # Si l'image est en niveaux de gris, la convertir en RGB
             """if len(img.shape) == 2:
                 img = np.stack((img,)*3, axis=-1)

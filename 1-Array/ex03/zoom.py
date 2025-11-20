@@ -41,7 +41,8 @@ def zoom_image(image: np.ndarray,
         # Afficher la nouvelle forme de l'image
         or_shape = zoomed_image.reshape(zoomed_image.shape[0],
                                         zoomed_image.shape[1])
-        print(f"New shape after slicing:{zoomed_image.shape} or {or_shape.shape}")
+        print("New shape after slicing:" +
+        f"{zoomed_image.shape} or {or_shape.shape}")
         print(zoomed_image.reshape(1, zoomed_image.shape[0]
                                    * zoomed_image.shape[1], 1))
         return zoomed_image
@@ -50,7 +51,7 @@ def zoom_image(image: np.ndarray,
         raise e
 
 
-def display_image(image: np.ndarray, title: str):
+def display_image(image: np.ndarray):
     """
     Display the image with a title.
 
@@ -92,7 +93,7 @@ def main():
 
         zoomed_image = zoom_image(gray_array, 90, 450, 400, 400)
         # Afficher l'image zoomée
-        display_image(zoomed_image, "Zoomed Image")
+        display_image(zoomed_image)
     except Exception as e:
         print(f"Error: {e}")
 
