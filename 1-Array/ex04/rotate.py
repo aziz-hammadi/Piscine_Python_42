@@ -14,17 +14,21 @@ def custom_print_array(arr: np.ndarray) -> str:
 def zoom_image(image: np.ndarray, start_x=100,
                start_y=450, x=400, y=400) -> np.ndarray:
     """
-    Zoom on a specific area of the image and convert it to grayscale.
+    Effectue un zoom sur une zone spécifique de l'image
+    et la convertit en niveaux de gris.
 
     Args:
-        image (np.ndarray): The image as a NumPy array.
-        zoom_area (tuple): The area to zoom (start_x, start_y, end_x, end_y).
+        image (np.ndarray): L'image sous forme de tableau NumPy.
+        start_x (int): Coordonnée x de départ pour le zoom.
+        start_y (int): Coordonnée y de départ pour le zoom.
+        x (int): Largeur de la zone à zoomer.
+        y (int): Hauteur de la zone à zoomer.
 
     Returns:
-        np.ndarray: The zoomed and grayscale image.
+        np.ndarray: L'image zoomée et en niveaux de gris.
 
     Raises:
-        ValueError: If the zoom area is invalid.
+        ValueError: Si la zone de zoom est invalide.
     """
     try:
         # Vérifier que la zone de zoom est valide
@@ -36,7 +40,7 @@ def zoom_image(image: np.ndarray, start_x=100,
             or start_x + x > image.shape[0]
             or start_y + y > image.shape[1]
         ):
-            raise ValueError("Invalid zoom area.")
+            raise ValueError("Zone de zoom invalide.")
         end_x = start_x + x
         end_y = start_y + y
         # Zoom sur la zone spécifiée
@@ -45,8 +49,7 @@ def zoom_image(image: np.ndarray, start_x=100,
         # Afficher la nouvelle forme de l'image
         or_shape = zoomed_image.reshape(zoomed_image.shape[0],
                                         zoomed_image.shape[1], 1)
-        print(
-            f"The shape of image is:{or_shape.shape} or{zoomed_image.shape}")
+        print(f"The shape of image is:{or_shape.shape} or{zoomed_image.shape}")
         print(zoomed_image.reshape(1, zoomed_image.shape[0]
                                    * zoomed_image.shape[1], 1))
 
@@ -63,16 +66,15 @@ def zoom_image(image: np.ndarray, start_x=100,
 
 def display_image(image: np.ndarray, title: str):
     """
-    Display the image with a title.
+    Affiche l'image avec un titre.
 
     Args:
-        image (np.ndarray): The image to display.
-        title (str): The title of the image.
+        image (np.ndarray): L'image à afficher.
+        title (str): Le titre de l'image.
     """
     try:
-        plt.imshow(
-            image, cmap="gray", vmin=0, vmax=255
-        )  # Afficher en niveaux de gris
+        plt.imshow(image, cmap="gray", vmin=0, vmax=255)
+        # Afficher en niveaux de gris
         # plt.title(title)
         # plt.xlabel("X axis")
         # plt.ylabel("Y axis")
@@ -85,7 +87,8 @@ def display_image(image: np.ndarray, title: str):
 
 def main():
     """
-    Main function to load the image, zoom on a specific area, and display it.
+    Fonction principale pour charger l'image,
+    zoomer sur une zone spécifique et l'afficher.
     """
     try:
         # Charger l'image

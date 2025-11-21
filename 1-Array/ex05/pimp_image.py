@@ -38,9 +38,14 @@ def _collect_and_show(img, name, original=None):
         _collect_and_show.images.clear()
         _collect_and_show.titles.clear()
         _collect_and_show.original_added = False
-
+        print(ft_invert.__doc__)
+        print(ft_red.__doc__)
+        print(ft_green.__doc__)
+        print(ft_blue.__doc__)
+        print(ft_grey.__doc__)
 
 def ft_invert(array) -> array:
+    """Inverts the color of the image received"""
     if array is not None:
         res = 255 - array
         _collect_and_show(res, "Figure VIII.2: Invert", original=array)
@@ -48,6 +53,7 @@ def ft_invert(array) -> array:
 
 
 def ft_red(array) -> array:
+    """Keep only the red channel, set green and blue to 0"""
     if array is not None:
         result = array.copy()
         result[..., 1] = 0
@@ -57,6 +63,7 @@ def ft_red(array) -> array:
 
 
 def ft_green(array) -> array:
+    """Keep only the green channel, set red and blue to 0"""
     if array is not None:
         result = array.copy()
         result[..., 0] = 0
@@ -66,6 +73,7 @@ def ft_green(array) -> array:
 
 
 def ft_blue(array) -> array:
+    """Keep only the blue channel, set red and green to 0"""
     if array is not None:
         result = array.copy()
         result[..., 0] = 0
@@ -75,7 +83,7 @@ def ft_blue(array) -> array:
 
 
 def ft_grey(array, correction_index: int = 0) -> array:
-
+    """Convert image to greyscale (average of channels)"""
     correction = [1 / 0.5000, 1 / 0.80, 1 / 0.001]
 
     rgb = array.copy()
