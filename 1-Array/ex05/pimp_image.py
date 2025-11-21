@@ -8,7 +8,7 @@ def on_key(event):
 
 
 def _collect_and_show(img, name, original=None):
-    # Attributs fonction pour stocker le cycle sans global
+    # Fonction pour stocker les images
     if not hasattr(_collect_and_show, "images"):
         _collect_and_show.images = []
         _collect_and_show.titles = []
@@ -34,7 +34,7 @@ def _collect_and_show(img, name, original=None):
         plt.tight_layout()
         fig.canvas.mpl_connect("key_press_event", on_key)
         plt.show()
-        # Réinitialiser pour un nouveau cycle éventuel
+        # Réinitialiser la liste qui stocke les images
         _collect_and_show.images.clear()
         _collect_and_show.titles.clear()
         _collect_and_show.original_added = False
@@ -83,7 +83,7 @@ def ft_blue(array) -> array:
 
 
 def ft_grey(array, correction_index: int = 0) -> array:
-    """Convert image to greyscale (average of channels)"""
+    """Convert image to greyscale with correction factor"""
     correction = [1 / 0.5000, 1 / 0.80, 1 / 0.001]
 
     rgb = array.copy()
